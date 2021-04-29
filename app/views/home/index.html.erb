@@ -1,0 +1,60 @@
+<h1>Comments</h1>
+<p id="notice"><%= notice %></p>
+<table class="demo">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>content</th>
+      <th>commentable_type</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.content %></td>
+        <td><%= comment.commentable_type %></td>
+        <td><%= comment.commentable.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<table class="demo">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>content</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%= form_with(model: @comment, local: true) do |form| %>
+        <td><%= form.collection_select :student_id, @students, :id, :name, include_blank: true %></td>
+        <td><%= form.text_field :content_student %></td>
+        <td><%= form.submit "Save" %></td>
+      <% end %>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th>Teacher</th>
+      <th>content</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <%= form_with(model: @comment, local: true) do |form| %>
+        <td><%= form.collection_select :teacher_id, @teachers, :id, :name, {class: 'custom-select', include_blank: true} %></td>
+        <td><%= form.text_field :content_teacher %></td>
+        <td><%= form.submit "Save" %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<%= image_tag 'erd.png' %>
+
